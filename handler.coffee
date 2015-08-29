@@ -10,9 +10,8 @@ storage.initSync()
 Embark.contractsConfig.loadConfigFile 'config/contracts.yml'
 Embark.blockchainConfig.loadConfigFile 'config/blockchain.yml'
 chainFile = 'chains.json'
-env = 'development' # TODO : actually check for environment
+env = process.env.EMBARK_ENV || 'development'
 
-# TODO add caching
 class EmbarkCompiler
   processFilesForTarget: (files) ->
     contentHash = ""
