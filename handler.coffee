@@ -6,7 +6,7 @@ storage = Npm.require 'node-persist'
 # initialise enbark
 Embark.init()
 # storage is used for storing a cache-hash between builds
-storage.initSync()
+storage.initSync dir: '.persist' # configure this to be more discreet
 
 # TODO make the following block configurable via embark.yml
 
@@ -17,6 +17,14 @@ Embark.blockchainConfig.loadConfigFile 'config/blockchain.yml'
 # put chains.json in root dir of project, as per default embark behaviour
 chainFile = 'chains.json'
 env = process.env.EMBARK_ENV || 'development'
+
+
+
+# TODO start the engines (connect to)
+# can we at least detect if the blockchain is already running somehow?
+
+
+
 
 # define a class to be used by registerCompiller
 # embark's `deployContracts` adds multiple files into one and adds a connection script
@@ -35,13 +43,14 @@ class EmbarkCompiler
     # so let's shorten it to a fixed length
     contentHash = crypto.createHash('md5').update(contentHash).digest('hex')
     # let's compare this hash to the one that we created last time we compiled
-    if contentHash isnt storage.getItem 'contentHash'
+    # TODO think of a better caching system! this one is broken
+    if contentHash isnt storage.getItem 'contentHash' and 1 is 2 # will never cache
       # if it is not the same, we need to compile again
       # but first let's record our current hash for next time
       storage.setItem 'contentHash', contentHash
       # let the developer know what we're doing
       # TODO add option to silence
-      console.log "🔨  compiling #{files.length} solidity files platform [#{files[0].getArch().split('.')[0]}]"
+      console.log "🔨  deploying #{files.length} solidity contract(s) on platform #{files[0].getArch()}"
       # use files[0] becuase AFAIK there is no global `addJavascipt` available
       # this seems to work just as well, but could be regarded as hacky
       files[0].addJavaScript
