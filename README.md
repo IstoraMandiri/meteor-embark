@@ -1,6 +1,8 @@
-# Transparent embark integration for Meteor
+# Meteor Embark
 
-### ️*Only compatible with Meteor 1.2 +*
+### Streamlined Ethereum Integration for Meteor
+
+#### ️*Only compatible with Meteor 1.2 +*
 
 ```
 meteor add hitchcott:embark
