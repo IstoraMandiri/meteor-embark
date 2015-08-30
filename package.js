@@ -19,5 +19,7 @@ Package.registerBuildPlugin({
 });
 
 Package.onUse(function (api) {
+  // TODO - create a script that stops the child process when meteor is killed by user
+  // but does not quit if it's a simple restart
   api.use('isobuild:compiler-plugin@1.0.0');
 });
