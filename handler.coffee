@@ -1,12 +1,10 @@
-fs = Npm.require 'fs'
-crypto = Npm.require 'crypto'
 Embark = Npm.require 'embark-framework'
-storage = Npm.require 'node-persist'
+# storage = Npm.require 'node-persist'
 
 # initialise enbark
 Embark.init()
 # storage is used for storing a cache-hash between builds
-storage.initSync dir: '.persist' # configure this to be more discreet
+# storage.initSync dir: '.persist' # configure this to be more discreet
 
 # TODO make the following block configurable via embark.yml
 
@@ -20,9 +18,8 @@ env = process.env.EMBARK_ENV || 'development'
 
 
 
-# TODO start the engines (connect to)
+# TODO start the engines (start blockchain)
 # can we at least detect if the blockchain is already running somehow?
-
 
 
 
@@ -39,25 +36,11 @@ class EmbarkCompiler
       # return the path itself so we can pass it directly to `deployContracts`
       return file.getPathInPackage()
 
-    # we don't want to store a huge combined hash if there are lots of files
-    # so let's shorten it to a fixed length
-    contentHash = crypto.createHash('md5').update(contentHash).digest('hex')
-    # let's compare this hash to the one that we created last time we compiled
-    # TODO think of a better caching system! this one is broken
-    if contentHash isnt storage.getItem 'contentHash' and 1 is 2 # will never cache
-      # if it is not the same, we need to compile again
-      # but first let's record our current hash for next time
-      storage.setItem 'contentHash', contentHash
-      # let the developer know what we're doing
-      # TODO add option to silence
-      console.log "🔨  deploying #{files.length} solidity contract(s) on platform #{files[0].getArch()}"
-      # use files[0] becuase AFAIK there is no global `addJavascipt` available
-      # this seems to work just as well, but could be regarded as hacky
-      files[0].addJavaScript
-        # pass `deployContracts` directly into `addJavaScript`, which returns the compiled .js file
-        data: Embark.deployContracts env, filePaths, false, chainFile
-        # name it in the same ay that meteor names packages, add `_web3` to the end
-        path: '/packages/hitchcott_embark_web3.js'
+    files[0].addJavaScript
+      # pass `deployContracts` directly into `addJavaScript`, which returns the compiled .js file
+      data: Embark.deployContracts env, filePaths, false, chainFile
+      # name it in the same ay that meteor names packages, add `_web3` to the end
+      path: '/packages/hitchcott_embark_web3.js'
 
 # Tell meteor that we want to use the above class on all `sol` files
 Plugin.registerCompiler
