@@ -10,8 +10,7 @@ meteor add hitchcott:embark
 
 ## What does it do?
 
-Basically, it automatically runs `embark deploy`
-
+1. Automatically starts a blockchain process if there isn't one running already (using `embark blockchain`)
 3. Use `embark deploy` on `.sol` files, which deploys them if they need to be (the 'embark way')
 4. Adds `web3` and it's contracts to platforms as global objects
 
@@ -22,14 +21,8 @@ Basically, it automatically runs `embark deploy`
 ## TODO
 
 ```
-- Better caching
-  - Rewrite function to be more meteor-like; compile individual SOL files
-- Automatic Blockchain Starting
-  - Create EmbarkDeamonizer
-
-- Patch embark itself
-  - Better startup config options
-  - Silence output
+- Rewrite build plugin function to be more meteor-like; compile + deploy individual SOL files
+  - This also enables more efficient caching a la metoer 1.2
 
 - Test integration
 - Configurable config file locations

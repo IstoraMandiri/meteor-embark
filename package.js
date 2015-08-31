@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Transparent Embark integration",
-  version: "0.2.1",
+  version: "0.3.0",
   name: "hitchcott:embark",
   git: "https://github.com/hitchcott/meteor-embark.git"
 });
@@ -8,13 +8,15 @@ Package.describe({
 Package.registerBuildPlugin({
   name: "embark",
   use: [
+    "meteor", //for wrapasync
     "coffeescript@1.0.8-rc.2"
   ],
   sources: [
     "handler.coffee"
   ],
    npmDependencies: {
-    'embark-framework': '0.8.6'
+    'embark-framework': '0.8.6',
+    'ps-node': '0.0.4'
   }
 });
 
