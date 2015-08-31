@@ -4,13 +4,19 @@
 
 #### ️*Only compatible with Meteor 1.2 +*
 
+Currently requires the use of a forked version of embark that is [pending PR](https://github.com/iurimatias/embark-framework/pull/73).
+
+Friendly reminder that ethereum is still in it's early days and can be shaky! Don't put your life savings into a ethereum contract -- at least not for a few years.
+
+Happy Dapp Developing.
+
 ```
 meteor add hitchcott:embark
 ```
 
 ## What does it do?
 
-1. Automatically starts a blockchain process if there isn't one running already (using `embark blockchain`)
+1. Automatically starts a blockchain process if there isn't one running already
 3. Use `embark deploy` on `.sol` files, which deploys them if they need to be (the 'embark way')
 4. Adds `web3` and it's contracts to platforms as global objects
 
@@ -27,6 +33,7 @@ meteor add hitchcott:embark
 - Test integration
 - Configurable config file locations
 - Configurable embark output (e.g. configurable `Contracts` namespace)
+- Configurable output verbosity
 ```
 
 ## License
