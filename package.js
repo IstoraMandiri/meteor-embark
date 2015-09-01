@@ -1,5 +1,5 @@
 Package.describe({
-  summary: "Transparent Embark integration",
+  summary: "Streamlined Ethereum Integration",
   version: "0.3.1",
   name: "hitchcott:embark",
   git: "https://github.com/hitchcott/meteor-embark.git"
