@@ -1,6 +1,6 @@
 spawn = Npm.require('child_process').spawn
 ps = Npm.require 'ps-node'
-Embark = Npm.require '/../../../../../../ether/embark-framework'
+Embark = Npm.require 'embark-framework'
 
 ###
 # Initialise Enbark
@@ -50,6 +50,8 @@ else
   # there's nothing running so we have to start our own blockchain process
   # get command string
   commandArgs = Embark.getStartBlockchainCommand(env, true)
+  if process.env.EMBARK_DEBUG
+    console.log commandArgs
   # satnatize so it's compatible with `spawn`
   commandArgs = commandArgs.replace(/\"/g,'').replace(/\=/g,' ').split(' ')
   # get the command name for `spawn`
@@ -61,10 +63,12 @@ else
   else
     networkId = commandArgs[commandArgs.indexOf('--networkid')+1]
 
-  # TODO: make output configurable
   spawnedProcess = spawn commandName, commandArgs
-  # spawnedProcess.stdout.on 'data', (msg) -> console.log msg.toString()
-  # spawnedProcess.stderr.on 'data', (msg) -> console.log msg.toString()
+
+  if process.env.EMBARK_DEBUG
+    console.log commandName, commandArgs.join(' ')
+    spawnedProcess.stdout.on 'data', (msg) -> console.log msg.toString()
+    spawnedProcess.stderr.on 'data', (msg) -> console.log msg.toString()
 
   console.log """
   🔗  Network #{networkId} : Starting New Blockchain Process

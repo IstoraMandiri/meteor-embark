@@ -15,7 +15,7 @@ Package.registerBuildPlugin({
     "handler.coffee"
   ],
    npmDependencies: {
-    'embark-framework': '0.8.6',
+    'embark-framework': '0.9.0',
     'ps-node': '0.0.4'
   }
 });

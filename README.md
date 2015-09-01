@@ -22,7 +22,8 @@ meteor add hitchcott:embark
 
 ## Configuration
 
-* Use environment variable `EMBARK_ENV` to specify environment - defaults to `development`
+* Use environment variable `EMBARK_ENV=environment` to specify environment - defaults to `development`
+* Use environment variable `EMBARK_DEBUG=1` to enable debug output
 
 ## TODO
 
