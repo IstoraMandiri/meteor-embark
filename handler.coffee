@@ -12,8 +12,12 @@ chainFile = 'chains.json'
 # allow importing of environment
 env = process.env.EMBARK_ENV || 'development'
 # load settings from project folders
-Embark.contractsConfig.loadConfigFile 'config/contracts.yml'
-Embark.blockchainConfig.loadConfigFile 'config/blockchain.yml'
+try
+  Embark.contractsConfig.loadConfigFile 'config/contracts.yml'
+  Embark.blockchainConfig.loadConfigFile 'config/blockchain.yml'
+catch e
+  console.log e
+  return false
 
 
 ###

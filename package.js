@@ -9,7 +9,7 @@ Package.registerBuildPlugin({
   name: "embark",
   use: [
     "meteor", //for wrapasync
-    "caching-compiler",
+    "caching-compiler@1.0.0-rc.0",
     "coffeescript@1.0.8-rc.2"
   ],
   sources: [
@@ -22,5 +22,6 @@ Package.registerBuildPlugin({
 });
 
 Package.onUse(function (api) {
+  api.versionsFrom('1.2-rc.7');
   api.use('isobuild:compiler-plugin@1.0.0');
 });
