@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Transparent Embark integration",
-  version: "0.3.0",
+  version: "0.3.1",
   name: "hitchcott:embark",
   git: "https://github.com/hitchcott/meteor-embark.git"
 });
@@ -9,6 +9,7 @@ Package.registerBuildPlugin({
   name: "embark",
   use: [
     "meteor", //for wrapasync
+    "caching-compiler",
     "coffeescript@1.0.8-rc.2"
   ],
   sources: [
@@ -21,7 +22,5 @@ Package.registerBuildPlugin({
 });
 
 Package.onUse(function (api) {
-  // TODO - create a script that stops the child process when meteor is killed by user
-  // but does not quit if it's a simple restart
   api.use('isobuild:compiler-plugin@1.0.0');
 });

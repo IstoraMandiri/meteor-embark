@@ -63,7 +63,13 @@ else
   else
     networkId = commandArgs[commandArgs.indexOf('--networkid')+1]
 
+  # spawn the blockchain process
   spawnedProcess = spawn commandName, commandArgs
+  # add shutdown hook
+  killBlockchain = -> process.kill spawnedProcess
+  process.on "uncaughtException", killBlockchain
+  process.on "SIGINT", killBlockchain
+  process.on "SIGTERM", killBlockchain
 
   if process.env.EMBARK_DEBUG
     console.log commandName, commandArgs.join(' ')
