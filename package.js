@@ -17,7 +17,8 @@ Package.registerBuildPlugin({
   ],
    npmDependencies: {
     'embark-framework': '0.9.0',
-    'ps-node': '0.0.4'
+    'ps-node': '0.0.4',
+    'intercept-stdout': '0.1.2'
   }
 });
 

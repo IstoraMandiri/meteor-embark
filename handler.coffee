@@ -1,6 +1,8 @@
 spawn = Npm.require('child_process').spawn
 ps = Npm.require 'ps-node'
 Embark = Npm.require 'embark-framework'
+intercept = Npm.require 'intercept-stdout'
+
 
 ###
 # Initialise Enbark
@@ -47,19 +49,34 @@ if foundProcesses.length
   else
     # let the user know we're connected to a network
     console.log """
-    📎  Network #{networkId} : Existing Blockchain Process Found
+    📎  network #{networkId} : Existing Blockchain Process Found
     """
 
 else
   # there's nothing running so we have to start our own blockchain process
+
+  # first we should quiet things down
+  unhookIntercept = intercept (text) -> if process.env.EMBARK_DEBUG then text else ""
+
   # get command string
   commandArgs = Embark.getStartBlockchainCommand(env, true)
-  if process.env.EMBARK_DEBUG
-    console.log commandArgs
+
+  console.log 'getStartBlockchainCommand returned: ', commandArgs
+
   # satnatize so it's compatible with `spawn`
-  commandArgs = commandArgs.replace(/\"/g,'').replace(/\=/g,' ').split(' ')
+  commandArgs = commandArgs
+  .replace /\"/g, ''
+  .replace /\=/g, ' '
+  .replace /\*/g, '\"\*\"'
+  .replace /\,/g, '\,'
+  .split ' '
+
   # get the command name for `spawn`
   commandName = commandArgs.shift()
+
+  if process.env.EMBARK_VERBOSITY
+    commandArgs = ['--verbosity', process.env.EMBARK_VERBOSITY].concat commandArgs
+
   # get the network id to show user
   if commandArgs.indexOf('--networkid') is -1
     # make sure we're not doing anything stupid
@@ -75,60 +92,100 @@ else
   process.on "SIGINT", killBlockchain
   process.on "SIGTERM", killBlockchain
 
+  console.log 'spawning command: ', commandName, commandArgs.join(' ')
+
   if process.env.EMBARK_DEBUG
-    console.log commandName, commandArgs.join(' ')
     spawnedProcess.stdout.on 'data', (msg) -> console.log msg.toString()
     spawnedProcess.stderr.on 'data', (msg) -> console.log msg.toString()
 
+  unhookIntercept()
+
   console.log """
-  🔗  Network #{networkId} : Starting New Blockchain Process
+  🔗  network #{networkId} : Starting New Blockchain Process
   """
-  # wait a bit
+
+  # blockchain is ready once account is unlocked. block progress until then.
   do Meteor.wrapAsync (done) ->
-    setTimeout ->
+    timeout = setTimeout ->
       done()
-    , 2000
+    , 1000 * 10 # 10 second timeout
+
+    unlockListener = (msg) ->
+      if msg.toString().indexOf 'unlocked' > -1
+        clearTimeout timeout
+        spawnedProcess.stdout.removeListener 'data', unlockListener
+        done()
+
+    spawnedProcess.stdout.on 'data', unlockListener
+
 
 
 ###
-# OLD more basic compiler, copies embark style, no caching
+# Compile & Deploy .sol files
 ###
 
-# define a class to be used by registerCompiller
-# embark's `deployContracts` adds multiple files into one and adds a connection script
-# so we'll need to hash the files files together to find a combined checksum
-class EmbarkCompiler
-  processFilesForTarget: (files) ->
 
-    console.log """
-    🔏  Deploying #{files.length} contract(s) on #{files[0].getArch().split('.')[0...2].join(' ')}
-    """
+class EmbarkCompiler extends CachingCompiler
 
-    # map the file paths and at the same time record the hash
-    filePaths = files.map (file) -> file.getPathInPackage()
+  constructor: ->
+    super
+      compilerName: 'EmbarkCompiler'
+      defaultCacheSize: 1024*1024*10
+      maxParallelism: 3
 
-    files[0].addJavaScript
-      # pass `deployContracts` directly into `addJavaScript`, which returns the compiled .js file
-      data: Embark.deployContracts env, filePaths, false, chainFile
-      # name it in the same ay that meteor names packages, add `_web3` to the end
-      path: '/packages/hitchcott_embark_web3.js'
-      # add to global scope
-      bare: true
+  _getCompileOptions: (inputFile) ->
+    bare: true
+    filename: inputFile.getPathInPackage()
+    # This becomes the "file" field of the source map.
+    generatedFile: "/" + inputFile.getPathInPackage() + ".js"
+    # This becomes the "sources" field of the source map.
+    sourceFiles: [inputFile.getDisplayPath()]
 
 
+  getCacheKey: (inputFile) ->
+    [
+      inputFile.getSourceHash()
+      @_getCompileOptions(inputFile)
+    ]
+
+  compileResultSize: (compileResult) -> compileResult.length
+
+  compileOneFile: (inputFile) ->
+    # filter output
+    unhookIntercept = intercept (message) ->
+
+      if message.indexOf('deployed') is 0
+        return """
+        \n🔏  #{message}
+        """
+      else if message.indexOf('contract') is 0
+        return """
+        🔐  #{message}
+        """
+      else if process.env.EMBARK_DEBUG
+        return message
+      else
+        return ""
+
+    # the actual compilation step
+    compiledContract = Embark.deployContracts env, [inputFile.getPathInPackage()], false, chainFile
+
+    # stop filtering outuput
+    unhookIntercept()
+
+    # remove web3 script, to be added once later
+    pureContract = ""
+    for line in compiledContract.split(';')
+      if line.indexOf('web3.') isnt 0
+        pureContract+= line + ';\n'
+
+    return pureContract
 
 
-# TODO Caching System
-# Building the new file style
-
-# init script i should just move to a different file
-# which contains one instance of the web3 init script
-# so all i need to do is process the contracts one by one through deployContracts
-# and strip the init scripts before passing them into addJavascript
-
-# by splitting out the `getSourceHash` of each individual file we can
-# efficiently cache them and only recompile when totally necessary
-
+  addCompileResult: (inputFile, compileResult) ->
+    inputFile.addJavaScript
+      data: compileResult,
+      path: inputFile.getPathInPackage() + '.js',
 
 
 
