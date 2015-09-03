@@ -164,6 +164,7 @@ else
 class EmbarkCompiler extends CachingCompiler
   constructor: ->
     @deploymentNotifications = {}
+    @firstRun = true
     super
       compilerName: 'EmbarkCompiler'
       defaultCacheSize: 1024*1024*10
@@ -225,7 +226,7 @@ class EmbarkCompiler extends CachingCompiler
         @_cache.set cacheKey, true
         @_writeCacheAsync cacheKey, true
 
-    if needToRecompile
+    if needToRecompile or @firstRun
       filePaths = inputFiles.map (file) -> file.getPathInPackage()
       # compile them together, then re-add for the relevent files
       compiledABIs = Embark.deployContracts env, filePaths, false, chainFile
@@ -239,6 +240,7 @@ class EmbarkCompiler extends CachingCompiler
     else
       console.log "using cached contracts on #{thisArch}"
 
+    @firstRun = false
     unhookIntercept()
 
   addCompileResult: (inputFile, compileResult, path) ->

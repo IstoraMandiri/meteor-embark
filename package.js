@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Streamlined Ethereum Integration",
-  version: "0.4.0",
+  version: "0.4.2",
   name: "hitchcott:embark",
   git: "https://github.com/hitchcott/meteor-embark.git"
 });
@@ -24,5 +24,10 @@ Package.registerBuildPlugin({
 
 Package.onUse(function (api) {
   api.versionsFrom('1.2-rc.7');
-  api.use('isobuild:compiler-plugin@1.0.0');
+  api.use();
+  api.use([
+    'isobuild:compiler-plugin@1.0.0',
+    'ethereum:web3@0.12.2'
+  ]);
+  api.export('web3');
 });
