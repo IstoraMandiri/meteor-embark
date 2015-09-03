@@ -4,6 +4,8 @@
 
 #### ️*Only compatible with Meteor 1.2 +*
 
+Currently requires the use of a forked version of embark that is [pending PR](https://github.com/iurimatias/embark-framework/pull/76).
+
 This package makes is insanely simple to start developing decentralized apps (dapps) in the meteor environment you're already used to.
 
 Friendly reminder that ethereum is still in it's early days and can be shaky! Don't put your life savings into a ethereum contract -- at least not for a few years. Happy Dapp Developing!
@@ -45,19 +47,20 @@ Environment Variables:
 
 * `EMBARK_ENV=environment` to specify environment - defaults to `development`
 * `EMBARK_DEBUG=1` to enable debug output
+* `EMBARK_VERBOSITY=6` to set output levels (see geth documentation, only works with `EMBARK_DEBUG` enabled)
 
 ## TODO
 
 ```
-- Auto-generate contracts/blockchain/genesis/password config (via embark boilerplate) if they don't exist
+v1
+- auto-generate contracts/blockchain/genesis/password config (via embark boilerplate) if they don't exist
+- mining notifications
 
-- Rewrite build plugin function to be more meteor-like; compile + deploy individual SOL files
-  - This also enables more efficient caching a la metoer 1.2
-
-- Test integration
-- Configurable config file locations
-- Configurable embark output (e.g. configurable `Contracts` namespace)
-- Configurable output verbosity
+> v1
+- ipfs deploy option
+- split contracts into seperate JS files
+- test framework integration
+- configurable config file locations\
 ```
 
 ## License

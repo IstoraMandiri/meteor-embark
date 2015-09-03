@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Streamlined Ethereum Integration",
-  version: "0.3.1",
+  version: "0.4.0",
   name: "hitchcott:embark",
   git: "https://github.com/hitchcott/meteor-embark.git"
 });
@@ -8,7 +8,7 @@ Package.describe({
 Package.registerBuildPlugin({
   name: "embark",
   use: [
-    "meteor", //for wrapasync
+    "meteor", //for wrapAsync
     "caching-compiler@1.0.0-rc.0",
     "coffeescript@1.0.8-rc.2"
   ],
