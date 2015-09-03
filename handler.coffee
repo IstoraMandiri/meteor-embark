@@ -1,6 +1,6 @@
 spawn = Npm.require('child_process').spawn
 # TODO replace with actual embark release
-Embark = Npm.require '/../../../../../../ether/embark-framework'
+Embark = Npm.require '../../../../../../ether/embark-framework'
 Future = Npm.require 'fibers/future'
 async = Npm.require 'async'
 intercept = Npm.require 'intercept-stdout'
@@ -113,10 +113,23 @@ else
   spawnedProcess = spawn commandName, commandArgs,
     stdio: ['ignore','pipe','pipe']
 
+  # no more console spam
+  unhookIntercept()
+
   # console log the childprocess
+  spawnedProcess.stdout.on 'data', (msg) ->
+    if process.env.EMBARK_DEBUG
+      console.log "child stdout: #{msg}"
+
+    # create a nice mining tracker
+    else if msg.toString().indexOf('== Pending transactions!') > -1
+      process.stdout.write "  🔨  Mining Transactions...\r"
+    else if msg.toString().indexOf('== No transactions left.') > -1
+      process.stdout.write "                                                       \r"
+
   if process.env.EMBARK_DEBUG
-    spawnedProcess.stdout.on 'data', (msg) -> console.log "child stdout: #{msg}"
-    spawnedProcess.stderr.on 'data', (msg) -> console.log "child stderr: #{msg}"
+    spawnedProcess.stderr.on 'data', (msg) ->
+        console.log "child stderr: #{msg}"
 
   # add shutdown hook
   killBlockchain = -> process.kill spawnedProcess
@@ -124,12 +137,10 @@ else
   process.on "SIGINT", killBlockchain
   process.on "SIGTERM", killBlockchain
 
-  # no more console spam
-  unhookIntercept()
 
   console.log "🔗  network #{networkId} : Starting New Blockchain Process"
 
-  # now wait for the process t be ready for contract creation
+  # now wait for the process to be ready for contract creation
   do Meteor.wrapAsync (done) ->
     timeout = setTimeout ->
       done()
