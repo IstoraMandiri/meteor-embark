@@ -1,5 +1,7 @@
 # [wip] Meteor Embark
 
+![Meteor Embark CLI Demo](http://i.imgur.com/4iscSMy.png)
+
 ### Streamlined Ethereum Integration for Meteor
 
 #### ️*Only compatible with Meteor 1.2 +*
