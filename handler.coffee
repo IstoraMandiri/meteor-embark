@@ -91,10 +91,6 @@ else
   .replace /\=/g, ' '
   .split ' '
 
-  # remove the last 2 params; js run, add as --jspath instead?
-  # commandArgs[commandArgs.indexOf('js')] = '--jspath'
-  console.log 'mining file', commandArgs[commandArgs.length-1]
-
   # get the command name for `spawn`
   commandName = commandArgs.shift()
 
