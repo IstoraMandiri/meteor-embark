@@ -14,17 +14,34 @@ Friendly reminder that ethereum is still in it's early days and can be shaky! Do
 
 ## Quickstart
 
-Make sure you have [all the dependencies of embark installed](https://github.com/iurimatias/embark-framework/wiki/Installation). You don't need to install embark itself as it is required automatically.
+Make sure you have [all the dependencies of embark installed](https://github.com/iurimatias/embark-framework/wiki/Installation).
 
 Set up your meteor project with the following files (this step will soon be automatic), as per embark demo boilerplate. This package assumes this configuration, so you don't need `embark.yml`.
 
 ```
-.meteor
+# config
+.meteor/
+  packages
+    hitchcott:embark
 config/
   blockahin.yml
   contracts.yml
   genesis.json
   password
+
+# project files in regular meteor fashion
+client/
+  myHtml.html
+  mySuperPublicContract.sol
+server/
+  myContractAdminApi.sol
+  myTrustedBackendContracts.sol
+  myMethods.coffee
+both/
+  simpleChat.html
+  simpleChat.css
+  simpleChat.coffee
+  simpleChat.sol
 ```
 
 Then install the meteor package
@@ -57,13 +74,23 @@ Environment Variables:
 v1
 - auto-generate contracts/blockchain/genesis/password config (via embark boilerplate) if they don't exist
 - mining notifications
+- docs
+- example project
 
 > v1
 - ipfs deploy option
-- split contracts into seperate JS files
+- client only deploy option
+- split contracts into seperate JS files on client (needed?)
 - test framework integration
-- configurable config file locations\
+- configurable config file locations
 ```
+
+## Thanks to
+
+* [embark-framework](https://github.com/iurimatias/embark-framework)
+* [etehereum](https://www.ethereum.org/)
+* [meteor](https://github.com/meteor/meteor)
+
 
 ## License
 
