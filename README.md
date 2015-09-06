@@ -14,7 +14,7 @@ Friendly reminder that ethereum is still in it's early days and can be shaky! Do
 
 Make sure you have [all the dependencies of embark installed](https://github.com/iurimatias/embark-framework/wiki/Installation).
 
-Set up your meteor project with the following config files, as per embark demo boilerplate (the embark way). This package assumes this configuration, so you don't need `embark.yml`.
+Set up your meteor project with the following config files, as per [embark demo boilerplate](https://github.com/iurimatias/embark-framework/tree/develop/demo_meteor/config) (the embark way). This package assumes this configuration, so you don't need `embark.yml`.
 
 *This step will soon be automatic*
 
