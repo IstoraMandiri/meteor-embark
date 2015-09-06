@@ -1,14 +1,14 @@
-# [wip] Meteor Embark
+# Meteor Embark
 
 ![Meteor Embark CLI Demo](http://i.imgur.com/4iscSMy.png)
 
 ### Streamlined Ethereum Integration for Meteor
 
-#### ️*Only compatible with Meteor 1.2 +*
+#### ️*Only Compatible with Meteor 1.2 +*
 
-This package makes is insanely simple to start developing decentralized apps (dapps) in the meteor environment you're already used to.
+This package makes is insanely simple to start developing decentralized apps (dapps) in the Meteor environment you're already used to.
 
-Friendly reminder that ethereum is still in it's early days and can be shaky! Don't put your life savings into a ethereum contract -- at least not for a few years. Happy Dapp Developing!
+Friendly reminder that ethereum is still in it's early days and things might not always work as expected! Don't put your life savings into a ethereum contract -- at least not for a few years. Happy Dapp Developing!
 
 ## Quickstart
 
