@@ -207,7 +207,6 @@ class EmbarkCompiler extends CachingCompiler
 
   # hook into the before/after hook
   processFilesForTarget: (inputFiles) ->
-
     # filter output
     unhookIntercept = intercept (message) =>
       # make the outuput easier to parse
@@ -237,19 +236,23 @@ class EmbarkCompiler extends CachingCompiler
         @_cache.set cacheKey, true
         @_writeCacheAsync cacheKey, true
 
-    if needToRecompile or @firstRun
+    combinedCacheKey = @_deepHash ['combined', thisArch]
+    cachedResult = @_cache.get(combinedCacheKey) || @_readCache(combinedCacheKey)
+
+    if needToRecompile or !cachedResult
+      console.log 'Need to recompile!'
+      # get contract paths
       filePaths = inputFiles.map (file) -> file.getPathInPackage()
       # compile them together, then re-add for the relevent files
       compiledABIs = Embark.deployContracts env, filePaths, false, chainFile
-      # TODO split the file up into it's components
-      # pureContract = ""
-      # for line in compiledContract.split(';')
-      #   if line.indexOf('web3.') isnt 0
-      #     pureContract+= line + ';\n'
-      # return pureContract
+      # save the result to the cache
+      @_cache.set combinedCacheKey, compiledABIs
+      @_writeCacheAsync combinedCacheKey, compiledABIs
       @addCompileResult inputFiles[0], compiledABIs, '/packages/hitchcott_embark_web3_contracts.js'
     else
+      # add cached version
       console.log "using cached contracts on #{thisArch}"
+      @addCompileResult inputFiles[0], cachedResult, '/packages/hitchcott_embark_web3_contracts.js'
 
     @firstRun = false
     unhookIntercept()
