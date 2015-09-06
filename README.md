@@ -6,8 +6,6 @@
 
 #### ️*Only compatible with Meteor 1.2 +*
 
-Currently requires the use of a forked version of embark that is [pending PR](https://github.com/iurimatias/embark-framework/pull/76).
-
 This package makes is insanely simple to start developing decentralized apps (dapps) in the meteor environment you're already used to.
 
 Friendly reminder that ethereum is still in it's early days and can be shaky! Don't put your life savings into a ethereum contract -- at least not for a few years. Happy Dapp Developing!
@@ -16,25 +14,28 @@ Friendly reminder that ethereum is still in it's early days and can be shaky! Do
 
 Make sure you have [all the dependencies of embark installed](https://github.com/iurimatias/embark-framework/wiki/Installation).
 
-Set up your meteor project with the following files (this step will soon be automatic), as per embark demo boilerplate. This package assumes this configuration, so you don't need `embark.yml`.
+Set up your meteor project with the following config files, as per embark demo boilerplate (the embark way). This package assumes this configuration, so you don't need `embark.yml`.
+
+*This step will soon be automatic*
 
 ```
-# config
-.meteor/
-  packages
-    hitchcott:embark
+# config files
 config/
   blockahin.yml
   contracts.yml
   genesis.json
   password
+```
 
+Then include your `.sol` contracts along side your project files, anywhere in your project (the meteor way).
+
+```
 # project files in regular meteor fashion
 client/
   myHtml.html
   mySuperPublicContract.sol
+  mySuperPublicContractInterfact.coffee
 server/
-  myContractAdminApi.sol
   myTrustedBackendContracts.sol
   myMethods.coffee
 both/
@@ -73,7 +74,6 @@ Environment Variables:
 ```
 v1
 - auto-generate contracts/blockchain/genesis/password config (via embark boilerplate) if they don't exist
-- mining notifications
 - docs
 - example project
 

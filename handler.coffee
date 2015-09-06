@@ -1,6 +1,6 @@
 spawn = Npm.require('child_process').spawn
 # TODO replace with actual embark release
-Embark = Npm.require '../../../../../../ether/embark-framework'
+Embark = Npm.require 'embark-framework'
 Future = Npm.require 'fibers/future'
 async = Npm.require 'async'
 intercept = Npm.require 'intercept-stdout'
