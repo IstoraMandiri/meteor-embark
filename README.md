@@ -6,11 +6,13 @@
 
 #### ️*Only Compatible with Meteor 1.2 +*
 
-This package makes is insanely simple to start developing decentralized apps (dapps) in the Meteor environment you're already used to.
-
-Friendly reminder that ethereum is still in it's early days and things might not always work as expected! Don't put your life savings into a ethereum contract -- at least not for a few years. Happy Dapp Developing!
+This package makes it insanely simple to start developing decentralized apps (dapps) in the Meteor environment you are already used to.
 
 ## Quickstart
+
+Before you begin, make sure you have a basic understanding of ethereum and geth.
+
+And just a friendly reminder that ethereum is still in it's early days and you are on the front line. Don't put your life savings into an ethereum smart contract -- at least not for a few years!
 
 Make sure you have [all the dependencies of embark installed](https://github.com/iurimatias/embark-framework/wiki/Installation).
 
@@ -52,6 +54,8 @@ meteor add hitchcott:embark
 ```
 
 And that's it! You should be able to start your meteor project, and contracts will be automatically compiled on the relevant platform (client and/or server) and deployed to a blockchain.
+
+Happy Dapp Developing!
 
 ## What does it do
 
