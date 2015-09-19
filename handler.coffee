@@ -228,16 +228,15 @@ class EmbarkCompiler extends CachingCompiler
     for inputFile in inputFiles
       # first check for a cached versions
       cacheKey = @_deepHash @getCacheKey(inputFile)
-      if !@_cache.get(cacheKey) and !@_readCache(cacheKey)
+      if !@_cache.get(cacheKey)
         # there's no cached version, so flag that we need to recompile all contracts on this arch
         needToRecompile = true
         # let's tell the cache that we have the latest version of this file compiled
         # we don't need to save the cache result because we generate it fresh each time we deploy
         @_cache.set cacheKey, true
-        @_writeCacheAsync cacheKey, true
 
     combinedCacheKey = @_deepHash ['combined', thisArch]
-    cachedResult = @_cache.get(combinedCacheKey) || @_readCache(combinedCacheKey)
+    cachedResult = @_cache.get(combinedCacheKey)
 
     if needToRecompile or !cachedResult
       console.log 'Need to recompile!'
@@ -247,7 +246,6 @@ class EmbarkCompiler extends CachingCompiler
       compiledABIs = Embark.deployContracts env, filePaths, false, chainFile
       # save the result to the cache
       @_cache.set combinedCacheKey, compiledABIs
-      @_writeCacheAsync combinedCacheKey, compiledABIs
       @addCompileResult inputFiles[0], compiledABIs, '/packages/hitchcott_embark_web3_contracts.js'
     else
       # add cached version
