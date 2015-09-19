@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Streamlined Ethereum Integration",
-  version: "0.5.0",
+  version: "0.6.0",
   name: "hitchcott:embark",
   git: "https://github.com/hitchcott/meteor-embark.git"
 });
