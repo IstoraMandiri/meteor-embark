@@ -265,5 +265,5 @@ class EmbarkCompiler extends CachingCompiler
 
 # Tell meteor that we want to use the above class on all `sol` files
 Plugin.registerCompiler
-  extensions: ["sol"]
+  extensions: ["sol", "se"]
 , -> new EmbarkCompiler()
