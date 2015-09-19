@@ -77,16 +77,19 @@ Environment Variables:
 
 ```
 v1
-- auto-generate contracts/blockchain/genesis/password config (via embark boilerplate) if they don't exist
-- docs
+- auto-generate config (via embark boilerplate) if it doesn't exist
 - example project
+- docs
 
 > v1
+- mist support
 - ipfs deploy option
 - client only deploy option
+- ensure all options are supported
 - split contracts into seperate JS files on client (needed?)
 - test framework integration
 - configurable config file locations
+- tests
 ```
 
 ## Thanks to
