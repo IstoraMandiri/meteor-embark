@@ -29,7 +29,7 @@ config/
   password
 ```
 
-Then include your `.sol` contracts along side your project files, anywhere in your project (the meteor way).
+Then include your Solidity `.sol` or Serpent `.se` contracts along side your project files, anywhere in your project (the meteor way).
 
 ```
 # project files in regular meteor fashion
@@ -38,7 +38,8 @@ client/
   mySuperPublicContract.sol
   mySuperPublicContractInterfact.coffee
 server/
-  myTrustedBackendContracts.sol
+  mySerpentContract.se
+  mySolidityContract.sol
   myMethods.coffee
 both/
   simpleChat.html
