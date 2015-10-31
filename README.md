@@ -13,16 +13,12 @@ This package makes it insanely simple to start developing decentralized apps (da
 ```bash
 # install meteor
 curl https://install.meteor.com/ | sh
-# install homebrew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 # install ethereum
 brew tap ethereum/ethereum
 brew install ethereum
-# install embark-framework
-npm install -g embark-framework grunt-cli
 # clone repo
-cd ~/
 git clone https://github.com/hitchcott/meteor-embark
+# go to example app
 cd meteor-embark/example
 # start meteor
 EMBARK_DEBUG=1 meteor
@@ -37,7 +33,7 @@ Before you begin, make sure you have a basic understanding of ethereum and geth.
 
 And just a friendly reminder that ethereum is still in it's early days and you are on the front line. Don't put your life savings into an ethereum smart contract -- at least not for a few years!
 
-Make sure you have [all the dependencies of embark installed](https://github.com/iurimatias/embark-framework/wiki/Installation). Currently uses embark 1.0.2.
+Make sure you have [all the dependencies of embark installed](https://github.com/iurimatias/embark-framework/wiki/Installation). Meteor Embark currently uses Embark 1.0.2.
 
 Set up your meteor project with the following config files, as per [embark demo boilerplate](https://github.com/iurimatias/embark-framework/tree/develop/demo_meteor/config) (the embark way). This package assumes this configuration, so you don't need `embark.yml`.
 
