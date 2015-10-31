@@ -1,0 +1,22 @@
+<head>
+  <title>Example Dapp</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor Embark!</h1>
+
+  {{> hello}}
+</body>
+
+<template name="hello">
+  {{#if transaction}}
+    <p>Completing transaction: {{transaction}}</p>
+  {{else}}
+    <button>Click Me</button>
+  {{/if}}
+  <p>The contract '{{contractAddress}}' has been called <b>{{counter}}</b> times.</p>
+  <hr>
+  <h4>Web3 Info</h4>
+  <pre>{{web3Info}}</pre>
+
+</template>
