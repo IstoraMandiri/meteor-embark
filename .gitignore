@@ -1,1 +1,4 @@
 chains.json
+.npm/plugin/embark-new-edyktx/node_modules
+.node-xmlhttprequest-sync-*
+.node-xmlhttprequest-content-*

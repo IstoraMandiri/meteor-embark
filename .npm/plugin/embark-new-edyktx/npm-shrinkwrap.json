@@ -1364,23 +1364,6 @@
           "version": "0.0.3"
         }
       }
-    },
-    "web3": {
-      "version": "0.13.0",
-      "dependencies": {
-        "bignumber.js": {
-          "version": "git+https://github.com/debris/bignumber.js#94d7146671b9719e00a09c29b01a691bc85048c2"
-        },
-        "crypto-js": {
-          "version": "3.1.5"
-        },
-        "utf8": {
-          "version": "2.1.1"
-        },
-        "xmlhttprequest": {
-          "version": "1.8.0"
-        }
-      }
     }
   }
 }

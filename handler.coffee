@@ -58,11 +58,21 @@ foundProcesses = do Meteor.wrapAsync (done) ->
 useSimulator = env is 'development' and Embark.blockchainConfig.blockchainConfig.development.simulator
 
 if useSimulator and !foundProcesses.length
-  # start ethersim
-  ethersim.startServer()
+  console.log 'starting ethersim'
+  try
+    ethersim.startServer()
+  catch
+    console.log 'ethersim already running'
+  console.log 'setting ethersim provider', ethersim.web3Provider()
   web3.setProvider ethersim.web3Provider()
   Embark.init web3
-  console.log 'No need to start a blockchain as we are using simulator'
+  # reaload the config
+  Embark.contractsConfig.loadConfigFile 'config/contracts.yml'
+  Embark.blockchainConfig.loadConfigFile 'config/blockchain.yml'
+
+  unhookIntercept()
+  # let the user know we're connected to a network
+  console.log "⚡️  using simulated blockchain"
 
 else if foundProcesses.length
   # if we've found a process there is no need to start another one
@@ -254,10 +264,16 @@ class EmbarkCompiler extends CachingCompiler
       # env, contractFiles, destFile, chainFile, withProvider, withChain, cb
       compiledABIs = do Meteor.wrapAsync (done) ->
         try
-          Embark.deployContracts env, filePaths, false, chainFile, true, true, (result) ->
+          console.log 'abouot to compile', filePaths
+          console.log 'blockchainConfig', Embark.blockchainConfig
+          Embark.deployContracts env, filePaths, false, chainFile, true, !useSimulator, (result) ->
+            console.log 'completed compiling'
             done null, result
         catch e
           done e
+          # env, contractFiles, destFile, chainFile, withProvider, withChain, cb
+          # env, contractFiles, blockchainConfig, contractsConfig, chainManager, withProvider, withChain, _web3
+          # deploy = new Deploy(env, contractFiles, this.blockchainConfig.config(env), this.contractsConfig, this.chainManager, withProvider, withChain, this.web3);
       # save the result to the cache
       @_cache.set combinedCacheKey, compiledABIs
       @addCompileResult inputFiles[0], compiledABIs, '/packages/hitchcott_embark_web3_contracts.js'
