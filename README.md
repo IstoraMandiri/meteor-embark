@@ -8,7 +8,30 @@
 
 This package makes it insanely simple to start developing decentralized apps (dapps) in the Meteor environment you are already used to.
 
-## Quickstart
+## Quick Start (for OSX)
+
+```bash
+# install meteor
+curl https://install.meteor.com/ | sh
+# install homebrew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# install ethereum
+brew tap ethereum/ethereum
+brew install ethereum
+# install embark-framework
+npm install -g embark-framework grunt-cli
+# clone repo
+cd ~/
+git clone https://github.com/hitchcott/meteor-embark
+cd meteor-embark/example
+# start meteor
+EMBARK_DEBUG=1 meteor
+```
+Once meteor starts it will take a few seconds to start a blockchain and mine the demo contract.
+
+Then go to http://localhost:3000 and play with the example app!
+
+## Slow Start
 
 Before you begin, make sure you have a basic understanding of ethereum and geth.
 
