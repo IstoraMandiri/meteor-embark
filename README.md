@@ -80,6 +80,7 @@ Environment Variables:
 v1
 - implement the simulator (embark 1.0+)
 - auto-generate config (via embark boilerplate) if it doesn't exist
+- automatically maintain `contracts.yml`
 - example project
 - better docs
 
@@ -97,7 +98,7 @@ v1
 ## Thanks to
 
 * [embark-framework](https://github.com/iurimatias/embark-framework)
-* [etehereum](https://www.ethereum.org/)
+* [ethereum](https://www.ethereum.org/)
 * [meteor](https://github.com/meteor/meteor)
 
 

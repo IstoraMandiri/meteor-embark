@@ -1,5 +1,4 @@
 spawn = Npm.require('child_process').spawn
-# TODO replace with actual embark release
 Embark = Npm.require 'embark-framework'
 Future = Npm.require 'fibers/future'
 async = Npm.require 'async'
@@ -167,7 +166,7 @@ else
 
 
 ###
-# Compile & Deploy .sol files
+# Compile & Deploy files
 #
 # This runs once every time meteor is started AND during hot code reloads.
 ###
@@ -263,7 +262,7 @@ class EmbarkCompiler extends CachingCompiler
 
 
 
-# Tell meteor that we want to use the above class on all `sol` files
+# Tell meteor that we want to use the above on all Solidity & Serpent files
 Plugin.registerCompiler
   extensions: ["sol", "se"]
 , -> new EmbarkCompiler()

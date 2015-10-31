@@ -1,10 +1,10 @@
 {
   "dependencies": {
     "embark-framework": {
-      "version": "0.9.1",
+      "version": "0.9.3",
       "dependencies": {
         "commander": {
-          "version": "2.8.1",
+          "version": "2.9.0",
           "dependencies": {
             "graceful-readlink": {
               "version": "1.0.1"
@@ -185,7 +185,7 @@
           "version": "0.3.1"
         },
         "meteor-build-client": {
-          "version": "0.1.6",
+          "version": "0.1.9",
           "dependencies": {
             "simple-spinner": {
               "version": "0.0.3"
@@ -199,13 +199,13 @@
           "version": "0.0.3",
           "dependencies": {
             "node-proxy": {
-              "version": "0.9.0",
+              "version": "1.0.0",
               "dependencies": {
                 "bindings": {
-                  "version": "1.1.1"
+                  "version": "1.2.1"
                 },
                 "nan": {
-                  "version": "1.9.0"
+                  "version": "2.1.0"
                 }
               }
             }
@@ -226,10 +226,10 @@
           "version": "1.0.0",
           "dependencies": {
             "js-yaml": {
-              "version": "3.4.2",
+              "version": "3.4.3",
               "dependencies": {
                 "argparse": {
-                  "version": "1.0.2",
+                  "version": "1.0.3",
                   "dependencies": {
                     "lodash": {
                       "version": "3.10.1"
@@ -240,7 +240,7 @@
                   }
                 },
                 "esprima": {
-                  "version": "2.2.0"
+                  "version": "2.7.0"
                 }
               }
             },
@@ -281,7 +281,7 @@
               "version": "3.1.5"
             },
             "xmlhttprequest": {
-              "version": "1.7.0"
+              "version": "1.8.0"
             }
           }
         },
@@ -321,7 +321,7 @@
       }
     },
     "ps-node": {
-      "version": "0.0.4",
+      "version": "0.0.5",
       "dependencies": {
         "table-parser": {
           "version": "0.0.3"
