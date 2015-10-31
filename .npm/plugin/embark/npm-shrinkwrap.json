@@ -1303,10 +1303,10 @@
       }
     },
     "ps-node": {
-      "version": "0.0.5",
+      "version": "https://github.com/hitchcott/ps/archive/2ace1d34a77a12c62dcc4aee597d93b1a28468b4.tar.gz",
       "dependencies": {
         "table-parser": {
-          "version": "0.0.3"
+          "version": "git+https://github.com/hitchcott/table-parser.git#1b6b969f0c4e632df55191ab3a5d0dcaaae23c12"
         }
       }
     }

@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Streamlined Ethereum Integration",
-  version: "0.6.2",
+  version: "0.6.3",
   name: "hitchcott:embark",
   git: "https://github.com/hitchcott/meteor-embark.git"
 });
@@ -17,7 +17,7 @@ Package.registerBuildPlugin({
   ],
    npmDependencies: {
     'embark-framework': '1.0.2',
-    'ps-node': '0.0.5',
+    'ps-node': 'https://github.com/hitchcott/ps/archive/2ace1d34a77a12c62dcc4aee597d93b1a28468b4.tar.gz',
     'intercept-stdout': '0.1.2'
   }
 });
