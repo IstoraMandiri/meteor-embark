@@ -10,7 +10,8 @@ Meteor.startup ->
     Session.set 'transaction', false
     Session.set 'count', response.args.count.toNumber()
 
-  # start some logging of the eth status status -- TODO use events not polling
+  # start some logging of the eth status status
+  # TODO use events not polling; too many HTTP requests?
   setInterval ->
     Session.set 'web3Info',
       "mining": web3.eth.mining

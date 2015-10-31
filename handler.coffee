@@ -242,7 +242,13 @@ class EmbarkCompiler extends CachingCompiler
       # get contract paths
       filePaths = inputFiles.map (file) -> file.getPathInPackage()
       # compile them together, then re-add for the relevent files
-      compiledABIs = Embark.deployContracts env, filePaths, false, chainFile
+      # env, contractFiles, destFile, chainFile, withProvider, withChain, cb
+      compiledABIs = do Meteor.wrapAsync (done) ->
+        try
+          Embark.deployContracts env, filePaths, false, chainFile, true, true, (result) ->
+            done null, result
+        catch e
+          done e
       # save the result to the cache
       @_cache.set combinedCacheKey, compiledABIs
       @addCompileResult inputFiles[0], compiledABIs, '/packages/hitchcott_embark_web3_contracts.js'
