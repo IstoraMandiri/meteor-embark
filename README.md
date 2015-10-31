@@ -8,7 +8,7 @@
 
 This package makes it insanely simple to start developing decentralized apps (dapps) in the Meteor environment you are already used to.
 
-## Quick Start (for OSX)
+## Install & Start (for OSX)
 
 ```bash
 # install meteor
@@ -27,11 +27,11 @@ cd meteor-embark/example
 # start meteor
 EMBARK_DEBUG=1 meteor
 ```
-Once meteor starts it will take a few seconds to start a blockchain and mine the demo contract.
+Once Meteor starts it will take a few seconds to start a blockchain and mine the demo contract.
 
 Then go to http://localhost:3000 and play with the example app!
 
-## Slow Start
+## Full Setup Instructions
 
 Before you begin, make sure you have a basic understanding of ethereum and geth.
 
@@ -81,21 +81,25 @@ And that's it! You should be able to start your meteor project, and contracts wi
 
 Happy Dapp Developing!
 
-## What does it do
+## What does it do?
 
-* Automatically starts a blockchain process in the background for development (with a random networkId) if there isn't one running already (NOTE: this does't work ATM due to https://github.com/neekey/ps/issues/7)
+* Automatically starts a blockchain process in the background for development (with a random networkId) if there isn't one running already (NOTE: this does't work at the moment due to https://github.com/neekey/ps/issues/7)
 * Uses `embark deploy` on all `.sol` and `.se` files in your project, and re-deploys them if they need to be. This also creates javascript `web3` ABI files that can be used to interact with the contacts for both client and/or server depending on where you place the contracts in your project (in 'the meteor way'). Each contract becomes a global object (just like embark).
 * Creates a connection using `web3` via RCP to the blockchain process in both clients and on the server when your meteor app starts (only if contracts exist on that platform).
 
 You can then, for exmaple, simply call `SimpleStorage.get()` on either the client or the server.
 
+Check out the demo app for more usage examples!
+
+For more information about embark configuration, check the [embark-framework repo](https://github.com/iurimatias/embark-framework).
+
 ## Configuration
 
 Environment Variables:
 
-* `EMBARK_ENV=environment` to specify environment - defaults to `development`
 * `EMBARK_DEBUG=1` to enable debug output
 * `EMBARK_VERBOSITY=6` to set output levels (see geth documentation, only works with `EMBARK_DEBUG` enabled)
+* `EMBARK_ENV=environment` to specify environment - defaults to `development`
 
 ## TODO
 
