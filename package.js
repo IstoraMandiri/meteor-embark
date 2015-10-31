@@ -18,6 +18,8 @@ Package.registerBuildPlugin({
    npmDependencies: {
     'embark-framework': '1.0.2',
     'ps-node': '0.0.5',
+    'web3': '0.13.0',
+    'ethersim': '0.1.6',
     'intercept-stdout': '0.1.2'
   }
 });

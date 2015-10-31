@@ -4,6 +4,8 @@ Future = Npm.require 'fibers/future'
 async = Npm.require 'async'
 intercept = Npm.require 'intercept-stdout'
 ps = Npm.require 'ps-node'
+web3 = Npm.require 'web3'
+ethersim = Npm.require 'ethersim'
 
 ###
 # Initialise Embark
@@ -45,7 +47,6 @@ unhookIntercept = intercept (text) ->
 console.log Embark.contractsConfig
 console.log Embark.blockchainConfig
 
-
 # let's look for an existing blockchain process (geth)
 foundProcesses = do Meteor.wrapAsync (done) ->
   ps.lookup
@@ -54,8 +55,16 @@ foundProcesses = do Meteor.wrapAsync (done) ->
     console.log 'ps.lookup', err, res
     done err, res
 
+useSimulator = env is 'development' and Embark.blockchainConfig.blockchainConfig.development.simulator
 
-if foundProcesses.length
+if useSimulator and !foundProcesses.length
+  # start ethersim
+  ethersim.startServer()
+  web3.setProvider ethersim.web3Provider()
+  Embark.init web3
+  console.log 'No need to start a blockchain as we are using simulator'
+
+else if foundProcesses.length
   # if we've found a process there is no need to start another one
   if foundProcesses[0].arguments.indexOf('--networkid') is -1
     # if there is no --networkdid argument
