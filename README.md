@@ -4,9 +4,13 @@
 
 ### Streamlined Ethereum Integration for Meteor
 
-#### ️*Only Compatible with Meteor 1.2 +*
-
 This package makes it insanely simple to start developing decentralized apps (dapps) in the Meteor environment you are already used to.
+
+* Automatically starts an Ethereum blockchain `geth` process in the background
+* Or it will try to conntect to an existing process if one exists
+* Optionally use the a simulation mode (ethersim) for more rapid development
+* Automatically mine contracts and transactions on a zero-config private testnet
+* Compile Solidity `.sol` and Serpent `.se` files on the fly in the Meteor way
 
 ## Install & Start (for OSX)
 
