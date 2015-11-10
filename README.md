@@ -1,5 +1,7 @@
 # Meteor Embark
 
+⚠️ (This package is currently out of action -- I'm working on it)
+
 ![Meteor Embark CLI Demo](http://i.imgur.com/4iscSMy.png)
 
 ### Streamlined Ethereum Integration for Meteor
