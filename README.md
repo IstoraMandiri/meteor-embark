@@ -1,6 +1,6 @@
 # Meteor Embark
 
-⚠️ (This package is currently out of action -- I'm working on it)
+⚠️ This package is currently in beta - please report any bugs or issues. Thanks.
 
 ![Meteor Embark CLI Demo](http://i.imgur.com/4iscSMy.png)
 
