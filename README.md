@@ -87,7 +87,7 @@ Happy Dapp Developing!
 
 * Automatically starts a blockchain process in the background for development (with a random networkId) or uses an external chain if there's one running already
 * Uses `embark deploy` on all `.sol` and `.se` files in your project, and re-deploys them if they need to be. This also creates javascript `web3` ABI files that can be used to interact with the contacts for both client and/or server depending on where you place the contracts in your project (in 'the meteor way'). Each contract becomes a global object (just like embark).
-* Creates a connection using `web3` via RCP to the blockchain process in both clients and on the server when your meteor app starts (only if contracts exist on that platform).
+* Creates a connection using `web3` via RPC to the blockchain process in both clients and on the server when your meteor app starts (only if contracts exist on that platform).
 
 You can then, for exmaple, simply call `SimpleStorage.get()` on either the client or the server.
 
