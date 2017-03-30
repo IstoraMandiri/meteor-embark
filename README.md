@@ -1,6 +1,6 @@
-# Meteor Embark
+# Meteor Embark (DEPRECATED)
 
-⚠️ This package is currently in beta - please report any bugs or issues. Thanks.
+⛑ It's recommended to use Embark proper, rather than this package.
 
 ![Meteor Embark CLI Demo](http://i.imgur.com/4iscSMy.png)
 
